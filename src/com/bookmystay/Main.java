@@ -1,23 +1,26 @@
-// Use Case-5: Add-On Service Selection
-// Enhance bookings with optional services like breakfast or spa
-// @author Developer
-// @version 5.0
-
 package com.bookmystay;
 
+//Use Case-6: Booking History & Reporting
+//Maintain complete booking history for audit and reporting
+//@author Developer
+//@version 6.0 UC-6: Booking History & Reporting
+
 import java.util.Scanner;
-import com.bookmystay.inventory.Admin;
-import com.bookmystay.inventory.RoomInventory;
+
+import com.bookmystay.guest.BookingHistory;
 import com.bookmystay.guest.BookingQueue;
 import com.bookmystay.guest.Guest;
+import com.bookmystay.inventory.Admin;
+import com.bookmystay.inventory.RoomInventory;
 
 public class Main {
     public static void main(String[] args) {
         RoomInventory inventory = new RoomInventory();
         BookingQueue bookingQueue = new BookingQueue();
+        BookingHistory bookingHistory = new BookingHistory();
         Scanner sc = new Scanner(System.in);
 
-        Admin admin = new Admin(inventory, bookingQueue, sc);
+        Admin admin = new Admin(inventory, bookingQueue, sc, bookingHistory);
         Guest guest = new Guest(inventory, bookingQueue, sc);
 
         boolean running = true;
@@ -32,8 +35,8 @@ public class Main {
             sc.nextLine();
 
             switch (choice) {
-                case 1 -> admin.showMenu();   // UC1–UC4 logic lives here
-                case 2 -> guest.showMenu();   // UC2–UC5 logic lives here
+                case 1 -> admin.showMenu();
+                case 2 -> guest.showMenu();
                 case 3 -> {
                     running = false;
                     System.out.println("Exiting system...");
@@ -45,3 +48,4 @@ public class Main {
         sc.close();
     }
 }
+
