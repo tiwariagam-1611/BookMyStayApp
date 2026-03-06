@@ -66,6 +66,16 @@ public class Guest {
                         continue;
                     }
                     Reservation reservation = new Reservation(guestName, type);
+
+                    // UC5: Add-on services
+                    System.out.println("Select add-on services (y/n):");
+                    System.out.print("Breakfast? ");
+                    if (sc.nextLine().equalsIgnoreCase("y")) reservation.addService("Breakfast");
+                    System.out.print("Spa? ");
+                    if (sc.nextLine().equalsIgnoreCase("y")) reservation.addService("Spa");
+                    System.out.print("Airport Pickup? ");
+                    if (sc.nextLine().equalsIgnoreCase("y")) reservation.addService("Airport Pickup");
+
                     bookingQueue.addRequest(reservation);
                 }
                 case 4 -> guestRunning = false;
@@ -74,4 +84,3 @@ public class Guest {
         }
     }
 }
-

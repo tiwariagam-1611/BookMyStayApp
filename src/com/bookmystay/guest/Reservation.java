@@ -18,26 +18,34 @@ package com.bookmystay.guest;
 public class Reservation {
     private String guestName;
     private String roomType;
-    private String roomId; // unique room ID assigned at confirmation
+    private String roomId; // assigned at confirmation
+    private Service service; // add-on services
 
     public Reservation(String guestName, String roomType) {
         this.guestName = guestName;
         this.roomType = roomType;
+        this.service = new Service();
     }
 
     public void assignRoomId(String roomId) {
         this.roomId = roomId;
     }
 
+    public void addService(String serviceName) {
+        service.addService(serviceName);
+    }
+
     public String getGuestName() { return guestName; }
     public String getRoomType() { return roomType; }
     public String getRoomId() { return roomId; }
+    public Service getService() { return service; }
 
     @Override
     public String toString() {
         return "Reservation [Guest=" + guestName +
                ", RoomType=" + roomType +
-               (roomId != null ? ", RoomID=" + roomId : "") + "]";
+               (roomId != null ? ", RoomID=" + roomId : "") +
+               ", Services=" + service + "]";
     }
 }
 
