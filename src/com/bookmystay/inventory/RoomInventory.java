@@ -15,21 +15,23 @@ package com.bookmystay.inventory;
  * - Ensures scalability for new room types
  */
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class RoomInventory {
     private Map<String, Integer> roomCounts;
     private Map<String, Double> roomPrices;
+    private Map<String, Set<String>> allocatedRooms; // roomType → assigned room IDs
 
     public RoomInventory() {
         roomCounts = new HashMap<>();
         roomPrices = new HashMap<>();
+        allocatedRooms = new HashMap<>();
     }
 
     public void addRoomType(String type, int count, double price) {
         roomCounts.put(type, count);
         roomPrices.put(type, price);
+        allocatedRooms.put(type, new HashSet<>());
         System.out.println("Added: " + type + " | Count: " + count + " | Price: " + price);
     }
 
@@ -67,6 +69,21 @@ public class RoomInventory {
     public double getPrice(String type) {
         return roomPrices.getOrDefault(type, 0.0);
     }
+
+    // Allocate a room atomically
+    public String allocateRoom(String type) {
+        if (!isAvailable(type)) return null;
+
+        // Generate unique room ID
+        String roomId = type.substring(0,1).toUpperCase() + (allocatedRooms.get(type).size() + 1);
+        allocatedRooms.get(type).add(roomId);
+
+        // Decrement count immediately
+        roomCounts.put(type, roomCounts.get(type) - 1);
+
+        return roomId;
+    }
 }
+
 
 

@@ -1,7 +1,7 @@
-// Use Case-3: Booking Request (First-Come-First-Served)
-// Ensure booking fairness during peak demand
+// Use Case-4: Payslip Print / Download
+// Create a downloadable payslip copy ensuring data integrity and immutability
 // @author Developer
-// @version 3.0 UC-3: Booking Request (First-Come-First-Served)
+// @version 4.0 UC-4: Payslip Print / Download
 
 package com.bookmystay;
 
