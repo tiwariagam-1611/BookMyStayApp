@@ -1,3 +1,5 @@
+package com.bookmystay;
+
 // ============== Room Inventory ================
 /*
  * RoomInventory manages hotel room types, counts, and prices.
@@ -12,8 +14,6 @@
  * - Clean separation of room data
  * - Ensures scalability for new room types
  */
-
-package com.bookmystay;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +58,14 @@ public class RoomInventory {
                                " | Available: " + roomCounts.get(type) +
                                " | Price: " + roomPrices.get(type));
         }
+    }
+
+    public boolean isAvailable(String type) {
+        return roomCounts.containsKey(type) && roomCounts.get(type) > 0;
+    }
+
+    public double getPrice(String type) {
+        return roomPrices.getOrDefault(type, 0.0);
     }
 }
 
